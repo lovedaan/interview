@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>es6 class</h1>
+    <script>
+        /* 
+            class 本质上就是一个语法糖
+            和es5的构造函数是一样的，简化了写法
+        */
+        class MathHandle {
+            constructor (x, y){
+                this.x = x;
+                this.y = y;
+            }
+
+            add () {
+                return this.x + this.y;
+            }
+        } 
+        
+        var m = new MathHandle(1, 2);
+        console.log(m.add(), 'add')
+        console.log(typeof MathHandle) //function
+        console.log(m.__proto__ === MathHandle.prototype);
+        console.log( MathHandle === MathHandle.prototype.constructor )
+    </script>
+</body>
+</html>

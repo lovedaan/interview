@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../js/jquery.js"></script>
+    <script>
+        /* function handleData(url) {
+            var dtd = $.Deferred();
+            var awaitData = function (dtd, url) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (data) {
+                        dtd.resolve(data);
+                    },
+                    error: function (err) {
+                        dtd.reject(err);
+                    }
+                });
+                return dtd;
+            }
+            return awaitData(dtd, url);
+        }
+        var handle = handleData('./data.json');
+        handle.then(function (data) {
+            console.log(data);
+        }, function (err) {
+            console.log(err);
+        }); */
+        function handleData(url) {
+            var dtd = $.Deferred();
+            var awaitData = function (dtd, url) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (data) {
+                        dtd.resolve(data);
+                    },
+                    error: function (err) {
+                        dtd.reject(err);
+                    }
+                });
+                return dtd.promise();
+            }
+            return awaitData(dtd, url);
+        }
+        var handle = handleData('./data.json');
+        console.log(handle);
+        $.when(handle).then(function (data) {
+            console.log(data);
+        }, function (err) {
+            console.log(err);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Fn() {
+            this.x = 100;
+            this.y = 100;
+        }
+        Fn.prototype = {
+            x: 200,
+            add : function () {
+                alert(this.x + this.y);
+            }
+        };
+        var f = new Fn;
+        console.dir(Fn);
+        f.add(); // 200
+        f.__proto__.add(); // NaN 原型找共有，不会找私有，但会沿着原型链向上查找,找不到y这个属性值，就返回undefied, undefined+200 = NaN
+        console.log(Fn.prototype.constructor); // Object(){}
+        console.log(Fn.prototype.add === f.__proto__.add);//true
+    </script>
+</body>
+</html>

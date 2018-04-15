@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function myAjax(opts) {
+            
+            function paramseString(data) {
+                if(!data) return '';
+                var ret = [];
+                for(var k in data){
+                    ret.push(k +'='+ data[k]);
+                }
+
+                return ret.length ? ret.join('&') : '';
+            }
+
+            var xhr = new XMLHttpRequest();
+            var url = opts.url;
+            url = url.indexOf('?') >= 0 ? url + paramseString(opts.data) : url + '?' +paramseString(opts.data);
+            xhr.open(opts.type || 'GET', url, true);
+            xhr.send(null);
+            return new Promise((resolve, reject) => {
+                xhr.onload = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        resolve(xhr.responseText);
+                    }else{
+                        reject(xhr.responseText);
+                    }
+                }
+                xhr.onerror = function (err) {
+                    reject(err);
+                }
+            });
+
+        }
+        
+        
+        console.log('页面加载=====');
+        myAjax({
+            url: 'http://127.0.0.1:8000/list',
+            data: {
+                a: 12,
+                b: 24
+            }
+        }).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        });
+        
+        /* while (1) {
+            
+        } */
+        console.log('循环结束========');
+    </script>
+</body>
+</html>

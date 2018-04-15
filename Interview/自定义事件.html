@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">点击按钮</button>
+    <script>
+        var btn = document.getElementById('btn');
+        /* var type = 1;
+        switch (type) {
+            case 1:
+                console.log('输入的是：' + 1);
+                break;
+            default:
+                console.log('输入的是其他');
+                break;
+        } */
+        function getStar(num) {
+            var str = '';
+            for(var i = 0; i<num;i++){
+                str += '*';
+            }
+            return str;
+        }
+        /* for(var i = 0; i< 9;i++){
+            console.log(getStar(i + 1));
+        } */
+        var i = 0;
+        while (i<9) {
+            console.log(getStar(i + 1));
+            i++;
+        }
+        function test(name) {
+            console.log(name);
+            switch (name) {
+                case 1:
+                    console.log('输入的是：'+ 1);
+                    return;
+                default:
+                    console.log('输入的是其他');
+                    break;
+            }
+        }
+        Object.prototype.aa = 22;
+        test.prototype.age = 12;
+        //test(1);
+        function random(num1,num2) {
+            return parseInt(Math.random() * (num2 - num1 + 1) + num1);
+        }
+        //10-20
+        console.log(random(10,20));
+        var arrSort = ['10px','30px','50px','20px','40px'];
+        arrSort.sort(function(a,b) {
+            a = a.substr(0,2);
+            b = b.substr(0,2);
+            return b - a;
+        });
+        console.log(arrSort);
+        function data() {
+            var a = 1;
+            b = 2;
+            this.c = 3;
+        }
+        var d = new data();
+
+        console.log(d.a,'============a');
+        console.log(d.b,'============b');
+        console.log(d.c,'============c');
+        var aa = 1;
+        function bb() {
+            aa = 10;
+            return;
+            function aa() {
+                
+            }
+        }
+        bb();
+        alert(aa);
+    </script>
+</body>
+</html>

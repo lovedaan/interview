@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style lang="">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            border: 1px solid #000;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 0. 父级固定高度，最简单的，但是大多数情况是由内容去撑高高度，不能写死高度 -->
+    <!-- 1. clear:both 缺点是需要增加而外的空标签来实现 -->
+    <div class="container c1">
+        <style lang="">
+            .container.c1{
+                
+            }
+            .container.c1 .clear{
+                clear:both;
+            }
+            .container.c1 .p1{
+                width: 200px;
+                height: 200px;
+                float: left;
+                background: red;
+            }
+            .container.c1 .p2{
+                width: 200px;
+                height: 200px;
+                float: right;
+                background: blue;
+            }
+        </style>
+        <p class="p1">左边</p>
+        <p class="p2">右边</p>
+        <div class="clear"></div>
+    </div>
+    <!-- 2. overflow:hidden; 在父级元素添加，最简单的清除浮动方法，利用的是BFC的原理，一个元素如果子元素有浮动元素，那父级元素设置overflow的值不为visible，则可让父级计算浮动子元素的高度。不兼容ie678-->
+    <div class="container c2">
+        <style lang="">
+            .container.c2 {
+                overflow: hidden;
+            }
+    
+            .container.c2 .p1 {
+                width: 200px;
+                height: 200px;
+                float: left;
+                background: red;
+            }
+    
+            .container.c2 .p2 {
+                width: 200px;
+                height: 200px;
+                float: right;
+                background: blue;
+            }
+        </style>
+        <p class="p1">左边</p>
+        <p class="p2">右边</p>
+    </div>
+    <!-- 3. 伪类清除法，最常见的一种清除浮动方法，原理就是第一种方法的变种，兼容性比较好 缺点：代码比较多，不易理解，实际开发中一般定义为公共类-->
+    <div class="container c3">
+        <style lang="">
+            .container.c3::after {
+                display: block;
+                content: '';
+                clear: both;
+                height: 0;
+            }
+            /* IE的专有属性 */
+            .container.c3{
+                zoom: 1;
+            }
+            .container.c3 .p1 {
+                width: 200px;
+                height: 200px;
+                float: left;
+                background: red;
+            }
+            .container.c3 .p2 {
+                width: 200px;
+                height: 200px;
+                float: right;
+                background: blue;
+            }
+        </style>
+        <p class="p1">左边</p>
+        <p class="p2">右边</p>
+    </div>
+</body>
+</html>

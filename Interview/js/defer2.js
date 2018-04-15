@@ -1,0 +1,1 @@
+console.log('这是defer2.js的代码');

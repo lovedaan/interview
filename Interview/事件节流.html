@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="box" />
+    <div id="list"></div>
+    <script>
+        var box = document.getElementById('box');
+        var list = document.getElementById('list');
+        var timer = null;
+        box.addEventListener('keyup',function () {
+            var val = this.value;
+            if(timer){
+                clearInterval('timer');
+            }
+            timer = setTimeout(() => {
+                console.log(val);
+            }, 200);
+        });
+        list.innerHTML = '<script>alert(123)<\/script>';
+    </script>
+</body>
+</html>

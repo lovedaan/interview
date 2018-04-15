@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       /*  var str = 'djjskd123ksja34dasdjkla33311saksl8349234';
+        //var reg = /\d+/g;
+        var reg = new RegExp('\\d+','g');
+        var ret = str.match(reg);
+        console.log(ret); */
+        //手机号，1开头，10个数字结尾
+       /*  var str = '18027215742';
+        var re = /^1\d{10}$/;
+        console.log(re.test(str)); */
+        // 有效数字 一个或者多个
+        /* var re = /^[0-9]*$/;
+        alert(re.test('235')); */
+        //18或19,用分组（）小括号 | 或
+        /* var re = /^(18|19)$/;
+        alert(re.test('19')); */
+        //邮箱
+        /* 
+            haitao.@163.com
+            898955713@qq.com
+            数字字母下划线 @ 数字字母下划线 . 字母
+         */
+         /* var re = /^\w+@[a-z0-9]+(\.[a-z]+){1,3}$/;
+         alert(re.test('haitao@163.co')); */
+         //正则的方法，就两个 test和exec()
+         var str = 'ajksd4234djaks33ksf456kklsf45466';
+         var re = /\d+/g;
+         var ret = [];
+         //递归可以实现
+        /*  function findNum(str) {
+             var result = re.exec(str); 
+              if(result && result[0]){
+                ret.push(result[0]);
+                findNum(str);
+             }else{
+                 return ret;
+             } 
+         }
+         findNum(str); */
+         //while 循环也可以实现
+         /* var result = re.exec(str);
+         while(result){
+             ret.push(result[0]);
+             result = re.exec(str);
+         }
+         console.log(ret); */
+         /* RegExp.prototype.myExec = function (str) {
+             var ret = [];
+             var result = this.exec(str);
+             while (result) {
+                 ret.push(result[0]);
+                 result = this.exec(str);
+             }
+             return ret;
+         }
+        
+         var ary = re.myExec(str);
+         console.log(ary); */
+         /* var str = '我的名字叫{3name}，我今年{age}岁了！';
+         var data = {
+             '3name': '李四',
+             'age': 25
+         };
+         str = str.replace(/{(\w+)}/g,function ($0, $1) {
+             console.log(arguments);
+             return data[$1];
+         });
+         console.log(str); */
+    </script>
+</body>
+</html>

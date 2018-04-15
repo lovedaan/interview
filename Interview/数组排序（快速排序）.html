@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /* 
+            快速排序的原理：
+            取数组中的任意一项的值作为标杆，新建left，right两个空数组，循环数组，
+            比这个标杆大的值存到right这个数组中，比标杆小的值存到left这个数组中，
+            然后再从left和right两个数组中再取标杆值再次分大小存储
+            这里运用了一个算法：递归操作
+         */
+
+        function quickSort(arr) {
+            if( arr.length <= 1) return arr;
+            let bg = arr[0];
+            let left = [];
+            let right = [];
+            for (let i = 1; i < arr.length; i++) {
+                let item = arr[i];
+                if(item < bg ){
+                    left.push(item);
+                }else{
+                    right.push(item);
+                }
+            }
+
+            return quickSort(left).concat(bg, quickSort(right));
+        }
+        console.log(quickSort([33, 11, 2, 4, 66, 24, 5]));
+    </script>
+</body>
+
+</html>

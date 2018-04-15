@@ -1,0 +1,1 @@
+console.log('async2.js 的代码');

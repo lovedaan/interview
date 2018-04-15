@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            1.上级作用域：只跟函数堆内存在哪个空间下开辟有关，
+            跟函数哪里执行无关。
+            2.预解析和函数声明提升
+            3.形参赋值
+            4.内存不释放和暂时不释放
+            5. ++i 是先增加再运算， i++ 是先运算再增加
+         */
+        /* function fn() {
+            var i = 10;
+            return function (n) {
+                console.log(n + (++i));
+            }
+        }
+        var f = fn();
+        f(15); // 26
+        f(20); // 32
+        fn()(15); // 26
+        fn()(20); // 31
+        fn()(30); // 41
+        f(30); //43 */
+
+        var i = 3;
+        function fn() {
+            i*=2;
+            return function (n) {
+                console.log(n*(++i));
+            }
+        }
+        var f = fn();
+        f(3); // 21  i=7
+        fn()(3); //45 i=15
+        f(4); //64 i=16
+        fn()(3);//99 i=33
+    </script>
+</body>
+</html>

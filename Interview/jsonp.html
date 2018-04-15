@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">jsonp请求豆瓣数据</button>
+    <div class="box">
+        <input type="text" id="searchText" />
+        <ul class="list"></ul>
+    </div>
+    <script>
+        //豆瓣的api是这样的，
+        //http://api.douban.com/v2/movie/coming_soon/?start=0&count=10&callback=fn
+        function jsonp(opts) {
+            
+            var url = opts.url;
+            var cb = opts.cb || 'callback';
+            var cbName = 'jsonp' + Math.random().toString().replace('.', '');
+            cb = cb +'='+ cbName;
+            url = url.indexOf('?') >= 0 ? url + paramsString(opts.data) + '&' + cb : url + '?' + paramsString(opts.data) + '&' + cb;
+
+            var oScript = document.createElement('script');
+
+            oScript.src = url;
+
+            document.body.appendChild(oScript);
+
+            function paramsString(data) {
+                if(!data) return '';
+                var ret = [];
+                for(var k in data){
+                    ret.push(k +'='+ data[k]);
+                }
+                return ret.length ? ret.join('&') : '';
+            }
+
+            return new Promise(function (resolve, reject) {
+                //定义函数
+                window[cbName] = function (data) {
+                    document.body.removeChild(oScript);
+                    cbName = '';
+                    resolve(data);
+                }
+                oScript.onerror = function(err) {
+                    reject(err);
+                }
+            });
+        }
+
+        document.querySelector('#btn').addEventListener('click',function () {
+            jsonp({
+                url: 'http://api.douban.com/v2/movie/coming_soon',
+                data: {
+                    count: 10,
+                    start: 0
+                }
+            }).then(res => {
+                console.log(res);
+            });   
+        });
+        //https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=%E6%96%B0&json=1&p=3&sid=1466_21086_17001_20930&csor=1&pwd=xin&cb=jQuery110208605002208862444_1520568514995&_=1520568515001
+        var timer = null;
+        var list = document.querySelector('.list');
+         document.querySelector('#searchText').addEventListener('input', function () {
+            var val = this.value;
+            if(!timer){
+                clearTimeout(timer);
+            }
+            timer = setTimeout(() => {
+                jsonp({
+                    url: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+                    cb: 'cb',
+                    data: {
+                      wd: encodeURIComponent(val),
+                      json: 1,
+                      p: 3,
+                      csor: 1
+                    }
+                }).then(res => {
+                    console.log(res);
+                    createDom(list, res.s);
+                });
+            }, 200);
+         });
+
+         function createDom(obj, data) {
+             obj.innerHTML = '';
+             var str = '';
+             data.forEach(item => {
+                 str += `<li>${item}</li>`;
+             });
+             obj.innerHTML = str;
+         }
+    </script>
+</body>
+</html>

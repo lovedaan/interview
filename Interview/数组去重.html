@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var ary = [1,3,2,1,3,2,4,4,4,3];
+        /* Array.prototype.rename = function () {
+            var ret = [];
+            for(var i = 0; i< this.length; i++){
+                if(ret.indexOf(this[i]) === -1){
+                    ret.push(this[i]);
+                }
+            }
+            return ret;
+        } */
+        //统计每个出现多少次
+       /*  Array.prototype.rename = function () {
+            var obj = {};
+            var ret = [];
+            for (var i = 0; i < this.length; i++) {
+                var cur = this[i];
+                if (obj[cur]) {
+                    obj[cur]++;
+                }else{
+                    obj[cur] = 1;
+                }
+            }
+            console.log(obj);
+            for(var k in obj){
+                ret.push(k);
+            }
+            return ret;
+        } */
+         Array.prototype.rename = function () {
+            var obj = {};
+            var ret = [];
+            for (var i = 0; i < this.length; i++) {
+                var cur = this[i];
+                if (!obj[cur]) {
+                    ret.push(cur);
+                    obj[cur] = 1;
+                }
+            }
+            return ret;
+        }
+        var ret = ary.rename();
+        console.log(ret);
+    </script>
+</body>
+</html>

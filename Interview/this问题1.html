@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            1.预解析
+            2.私有变量，在私有作用域里面的形参赋值和带var的
+            3. || 或运算符
+            4. 匿名函数自执行内部的this 是window
+            5.函数的内部没有return，或有return但是没有赋值，都是返回undefined
+         */
+        var name = '张三';
+        var age = 25;
+        name = (function (name,age) {
+            arguments[0] = '李四';
+            age = age || this.age;
+            console.log(name,age); // 李四，25
+        })(name);
+        console.log(name,age); // undefine,25
+    </script>
+</body>
+</html>

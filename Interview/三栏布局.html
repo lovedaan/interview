@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style lang="" media="screen">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .layout{
+            /* height: 200px; */
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 三栏布局，高度固定，左右固定宽度，中间自适应 -->
+    <!-- 1. 浮动布局方法，前两个盒子一左一右浮动，最后一个margin居中 -->
+    <section class="layout float">
+        <style lang="" media="screen">
+            .left-right-center{
+                overflow: hidden;
+            }
+            .layout.float .left{
+                float: left;
+                width: 200px;
+                /* height: 200px; */
+                background: red;
+            }
+            .layout.float .right{
+                float: right;
+                width: 200px;
+                /* height: 200px; */
+                background: blue;
+            }
+            .layout.float .center{
+                margin: 0 auto;
+                overflow: hidden;
+                /* height: 200px; */
+                background: yellowgreen;
+            }
+        </style>
+        <article class="left-right-center">
+            <div class="left">
+                <p>增加内容</p>
+                <p>增加内容</p>
+                <p>增加内容</p>
+            </div>
+            <div class="right">
+                <p>增加内容</p>
+                <p>增加内容</p>
+                <p>增加内容</p>
+            </div>
+            <div class="center">
+                <h1>浮动布局</h1>
+                <p>增加内容</p>
+                <p>增加内容</p>
+                <p>增加内容</p>
+                <p>增加内容</p>
+                <p>增加内容</p>
+                <p>增加内容</p>
+                <p>增加内容</p>
+                <p>增加内容</p>
+                <p>增加内容</p>
+            </div>
+        </article>
+    </section>
+    <!-- 2. 定位布局 -->
+    <section class="layout position">
+        <style lang="" media="screen">
+            .left-right-center {
+                height: 200px;
+                overflow: hidden;
+            }
+    
+            .layout.position .left {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 200px;
+                height: 200px;
+                background: red;
+            }
+    
+            .layout.position .right {
+                position: absolute;
+                right: 0;
+                top: 0px;
+                width: 200px;
+                height: 200px;
+                background: blue;
+            }
+    
+            .layout.position .center {
+                position: absolute;
+                left: 200px;
+                right: 200px;
+                top: 0;
+                bottom: 0;
+                height: 200px;
+                background: yellowgreen;
+            }
+        </style>
+        <article class="left-right-center">
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="center"><h1>定位布局</h1></div>
+        </article>
+    </section>
+    <!-- 3. flex布局 -->
+    <section class="layout flex">
+        <style lang="" media="screen">
+            .layout.flex .left-right-center {
+                height: 200px;
+                overflow: hidden;
+                display: flex;
+            }
+    
+            .layout.flex .left {
+                width: 200px;
+                height: 200px;
+                background: red;
+            }
+    
+            .layout.flex .right {
+                width: 200px;
+                height: 200px;
+                background: blue;
+            }
+            .layout.flex .center {
+                flex: 1;
+                height: 200px;
+                background: yellowgreen;
+            }
+        </style>
+        <article class="left-right-center">
+            <div class="left"></div>
+            <div class="center"><h1>flex布局</h1></div>
+            <div class="right"></div>
+        </article>
+    </section>
+    <!-- 4. 表格布局 cellpadding cellspacing-->
+    <section class="layout table">
+        <style lang="" media="screen">
+            .layout.table .table-content{
+                width: 100%;
+                height: 200px;
+                display: table;
+            }
+            .layout.table .table-content > div{
+                display: table-cell;
+                height: 200px;
+            }
+            .layout.table .left{
+                width: 200px;
+                background: red;
+            }
+            .layout.table .center{
+                background: yellowgreen;
+            }
+            .layout.table .right{
+                width: 200px;
+                background: blue;
+            }
+        </style>
+        <div class="table-content">
+            <div class="left"></div>
+            <div class="center"><h1>table布局</h1></div>
+            <div class="right"></div>
+        </div>
+    </section>
+    <!-- 5. grid 网格布局 父元素加 display:grid; grid-template-columns: 200px 1fr 200px;  -->
+    <section class="layout grid">
+        <style lang="" media="screen">
+            .layout.grid{
+                display: grid;
+                height: 200px;
+                grid-template-columns: 200px 1fr 200px;
+            }
+            .layout.grid .left{ background: red;}
+            .layout.grid .right{ background: yellowgreen;}
+            .layout.grid .center{ background: blue;}
+        </style>
+        <div class="left"></div>
+        <div class="right"><h1>grid布局</h1></div>
+        <div class="center"></div>
+    </section>
+    <script>
+        
+
+       /*  myAjax({
+            url: 'http://api.douban.com/v2/movie/in_theaters',
+            type: 'GET',
+            data: {
+                start: 0,
+                count: 10
+            }
+        }, function (data) {
+            console.log(data);
+        }); */
+        myAjax({
+            url: 'http://127.0.0.1:8000/login',
+            type: 'POST',
+            data: {
+                start: 0,
+                count: 10
+            }
+        }, function (data) {
+            console.log(data);
+        });
+        /* function bindEvent(obj, type, fn) {
+            if(!obj){
+                console.log('target对象必传');
+                return false;
+            }else if(!type){
+                console.log('tyoe类型必传');
+                return false;
+            }else if(typeof fn !== 'function'){
+                console.log('回调需是一个函数类型');
+                return false;
+            }
+            
+            if(obj.addEventListener){
+                obj.addEventListener(type, function(ev) {
+                    fn && fn(ev);
+                }, false);
+            }else{
+                obj.attachEvent('on' + type, function(ev) {
+                    fn && fn(ev);
+                });
+            }
+        }
+        bindEvent(document.querySelector('.float'), 'click', function(ev) {
+            alert(123);
+        }); */
+        function myAjax(opts, callback) {
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.onload = function () {
+                if(xhr.readyState === 4 && xhr.status === 200){
+                    callback && callback(xhr.responseText);
+                }
+            }
+            var type = opts.type;
+            if(type.toLowerCase() === 'post'){
+                xhr.open('post',opts.url, true);
+                xhr.setRequestHeader('Content-type','application/x-form-urlencoded');
+                xhr.send(pamarsString(opts.data));
+            }else if(type.toLowerCase() === 'get'){
+                var url = opts.url;
+                url = url.indexOf('?') >= 0 ? url + pamarsString(opts.data) : url + '?' + pamarsString(opts.data);
+                xhr.open('get',url, true);
+                xhr.send(null);
+            }
+            
+            function pamarsString(data) {
+                if(!data) return '';
+                var ret = [];
+                for(var k in data){
+                    ret.push(k +'='+ data[k]);
+                }
+                return ret.length ? ret.join('&') : '';
+            }
+            
+        }
+    </script>
+</body>
+</html>

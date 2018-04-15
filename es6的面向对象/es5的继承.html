@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            在es5中的继承大概有五六种方法
+            call+原型链拷贝继承
+        */ 
+        function extend(obj1, obj2) {
+            for(var k in obj1){
+                obj2[k] = obj1[k];
+            }
+        }
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        } 
+        Person.prototype.showName = function () {
+            alert(this.name);
+        } 
+        function Child(name, age, job) {
+           Person.call(this, name, age);
+           this.job = job; 
+        }
+        extend(Person.prototype, Child.prototype);
+        Child.prototype.showName = function () {
+            alert(this.job);
+        }
+        var p1 = new Person('ace', 18);
+        var c1 = new Child('hello', 18, 'IT');
+        p1.showName();
+        c1.showName(); 
+    </script>
+</body>
+</html>

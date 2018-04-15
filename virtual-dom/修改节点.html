@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="list">
+        <p>test 1</p>
+        <p>test 2</p>
+    </div>
+    <script>
+        var list = document.querySelector('#list');
+        var aP = list.querySelectorAll('p');
+        //先删除节点
+        aP[1].parentNode.removeChild(aP[1]);
+        //在添加节点
+        var oSpan = document.createElement('span');
+        oSpan.innerHTML = '我是新添加的 span';
+        list.appendChild(oSpan);
+    </script>
+</body>
+</html>

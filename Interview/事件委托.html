@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style lang="">
+        #app{
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+        }
+        .p1{
+            width: 100px;
+            height: 50px;
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p class="p1">这是一个段落</p>
+    </div>
+    <script>
+        function bindEvent(el, type, selector, fn) {
+            if(!fn){
+                fn = selector;
+                selector = null;
+            }
+            el.addEventListener(type, function(ev) {
+                if(selector){
+                    var target = ev.target;
+                    if(target.matches(selector)){
+                        fn.call(target, ev);
+                    }
+                }else{
+                    fn && fn(ev);
+                }
+            });
+        }
+        var app = document.querySelector('#app');
+        var p1 = document.querySelector('.p1');
+        bindEvent(app, 'click', 'p', function (ev) {
+            console.log('点击了子元素');
+        });
+        bindEvent(app, 'click',  function (ev) {
+            ev.stopPropagation();
+            
+            console.log('点击了父元素');
+        });
+        bindEvent(window, 'click', function (ev) {
+                console.log('点击了window');
+            });
+    </script>
+</body>
+</html>

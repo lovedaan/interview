@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background: red;
+            margin: 100px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="test">
+        <li>第一行</li>
+        <li>第二行</li>
+        <li>第三行</li>
+        <li>第四行</li>
+        <p>ajskjasd</p>
+    </ul>
+    <span id="inner">123 <span id="outer">abc</span></span>
+    <select name="" id="sel">
+        <option value="a">A</option>
+        <option value="b">B</option>
+    </select>
+    <div id="box"></div>
+    <pre>
+        jfksld
+        kslkfd
+        fjskl
+
+    </pre>
+    <script>
+        //'use strict';
+        // var str = '12345';
+        // function reverseStr(str) {
+        //     // var arr = str.split('');
+        //     // return arr.reverse().join(''); 
+        //     var arr = [];
+        //     for(var i = 0; i<str.length; i++){
+        //         arr.unshift(str.substr(i,1));
+        //     }
+        //     return arr.join('');
+        // }
+        //console.log(reverseStr(str));
+
+        // function isString(str) {
+        //     return Object.prototype.toString.call(str) === '[object String]' ? true : false;
+        // }
+        // var str = new String('aaa');
+        // console.log(isString(str));
+
+        // function replaceStr(str) {
+        //     var arr = str.split('-');
+        //     return arr.join('&');
+
+        // }
+        // console.log(replaceStr('dhja-dakjs-kja'));
+
+        // var test = document.querySelector('#test');
+        // test.addEventListener('click', function(ev) {
+        //     if(ev.target.tagName === 'LI'){
+        //         alert(ev.target.innerHTML);
+        //     }
+        // });
+
+        // document.onclick = function (ev) {
+        //     var e = ev || event;
+        //     var target = e['target'] || e['srcElement']
+        //     alert(target.tagName.toLowerCase());
+        // }
+        // var inner = document.querySelector('#inner');
+        // var outer = document.querySelector('#outer');
+        //不包括当前的标签内容
+       // console.log(inner.innerHTML);
+        //会包括当前的标签内容大的地方反复刚刚会黄家驹
+        //console.log(outer.outerHTML);
+        //电子邮箱：ace@163.com
+    //    function test() {
+    //        console.log(1);
+    //    }
+    //    setTimeout('test()', 10);
+        // function test() {
+        //     var a = 1;
+        //     setTimeout(() => {
+        //         alert(a);
+        //         a = 3;
+        //     }, 1000);
+        //     a = 2;
+        //     setTimeout(() => {
+        //         alert(a);
+        //         a = 4;
+        //     }, 3000);
+        // }
+        // test();
+        // alert(0);
+        //0 2 3
+        // (function () {
+        //     var a=b= 5;
+        //     alert(typeof a); //'number'
+        //     alert(typeof b); //'number
+        // })();
+        // alert(typeof a); //'undefined'
+        // alert(typeof b); //'number
+        // var sel = document.querySelector('#sel');
+        // sel.addEventListener('change', function (ev) {
+        //     //alert(this.selectedIndex);
+        //     var selectedIndex = this.selectedIndex;
+        //     console.log(this.options[selectedIndex].value);
+        //     console.log(this.options[selectedIndex].innerHTML);
+        // });
+        // function createInput() {
+        //     var oInput = document.createElement('input');
+        //     oInput.type = 'text';
+        //     oInput.style.cssText = 'display:block; width:120px;height:50px;margin:0 auto;border:1px solid #000;';
+        //     document.body.appendChild(oInput);
+        // }
+        // createInput();
+        //找对成数 比如 1,121,131，就是正着读和反着读是一样的
+        // function isNum(num) {
+        //     var str = num + '';
+        //     var arr = str.split('');
+        //     var newArr = arr.reverse();
+        //     if(str === newArr.join('')){
+        //         return true;
+        //     }else{
+        //         return false;
+        //     }
+        // }
+        // function findNum() {
+        //     var num = 10000;
+        //     var i;
+        //     var ret = [];
+        //     for(i = 1; i < num; i++){
+        //         if(isNum(i)){
+        //             ret.push(i);
+        //         }
+        //     }
+        //     return ret;
+        // }
+        // console.log(findNum());
+        // function sortArr(arr) {
+        //     return arr.sort(function (a, b) {
+        //         return a.i - b.i;
+        //     });
+        // }
+
+        //console.log(sortArr([{i:2,v:3}, { i: 3, v: 3 }, { i: 1, v: 3 }]));
+       // console.log(Math.random());  // 0 ~ 1
+        //console.log(parseInt(Math.random() * 10) + 1 );  // [0 ~ 10]
+        //console.log(parseInt(Math.random() * 10) + 5 );  // [5 ~ 15]
+        //console.log(Math.floor(Math.random() * (10 - 5 + 1) + 5));
+        // console.log(Math.floor(Math.random() * 6 + 5));
+
+        // //冒泡排序
+        // function bubbleSort(arr) {
+        //     for (let i = 0; i < arr.length - 1; i++) {
+        //         for (let j = arr.length - 1; j > i; j--) {
+        //             if(arr[j] < arr[j-1]){
+        //                 let temp = arr[j];
+        //                 arr[j] = arr[j - 1] ;
+        //                 arr[j -1] = temp;
+        //             }
+        //         }
+        //     }
+        //     return arr;
+        // }
+
+        // console.log(bubbleSort([2,4,1,6,3,5]));
+
+         //快速排序
+        //  function quictSort(arr) {
+        //      if(arr.length <= 1) return arr;
+        //      var val = arr[0];
+        //      var left = [];
+        //      var right = [];
+        //      for(var i = 1; i < arr.length; i++ ){
+        //          if(arr[i] > val){
+        //              right.push(arr[i]);
+        //          }else{
+        //              left.push(arr[i]);
+        //          }
+        //      }
+
+        //      return quictSort(left).concat(val, quictSort(right))
+        //  }   
+        //  console.log(quictSort([2, 4, 1, 6, 3, 5]));
+        // var box = document.querySelector('#box');
+        // var rotate = 0;
+        // box.onclick = function () {
+        //     rotate += 30;
+        //     this.style.transform = 'rotate('+ rotate+'deg)';
+        // }
+    </script>
+</body>
+</html>

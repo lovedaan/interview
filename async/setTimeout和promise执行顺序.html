@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* setTimeout(() => {
+            console.log(1);
+        });
+        new Promise(function(resolve) {
+            console.log(2);
+            resolve(3);
+        }).then(res => {
+            console.log(3);
+        }); */
+
+        // 2 3 1
+        /* 
+            new 一个构造函数，本质就是执行这个函数内部的代码，所以promise
+            里面的代码是同步，先执行
+            Promise.then()里面的是异步代码,优先于定时器异步代码的执行
+         */
+
+         setTimeout(function () {
+            console.log(1)
+         }, 0);
+
+         new Promise(function (resolve) {
+            console.log(2);
+            for (var i = 0; i < 10000; i++) {
+                i == 9999 && resolve();
+            }
+            console.log(3);
+         }).then(function () {
+            console.log(4);
+         });
+
+         console.log(5);
+         // 2 3 5 4 1
+    </script>
+</body>
+</html>

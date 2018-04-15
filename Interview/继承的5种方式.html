@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            通过字面量创建或new Object创建的对象和通过Object.create创建的是有区别，
+            Object.create(obj) 接收一个对象数据类型的参数，返回的新对象newObj,把obj当做新对象的原型，obj的私有属性和私有方法，将被挂在
+            newObj.__proto__上，即是共有属性和共有方法。修改了新对象的属性和方法，不会影响到原对象
+         */
+        /* var obj = {
+            name: '李四',
+            showName : function () {
+                alert(this.name);
+            }
+        };
+        var obj2 = Object.create(obj);
+        obj2.age = 25;
+        obj2.showAge = function () {
+            alert(this.age);
+        }
+        obj2.__proto__.showName = function () {
+            console.log(123);
+        } */
+
+        /* 
+            继承：子类把父类的属性和方法继承到自己身上
+         */
+         //1. 原型链继承：把父类的实例赋值给子类的原型，通过原型链的指向实现
+         //缺点：子类可以通过原型链修改父类的属性方法
+         /* function Fn() {
+             this.name = '李四';
+         }
+         function Child() {
+             this.age = '14';
+         }
+
+         Child.prototype = new Fn;
+         Child.prototype.constrcutor = Child;
+         Child.prototype.showAge = function () {
+             
+         };
+         var c1 = new Child; */
+
+         // 2. call方法继承，子类完成继承父类的私方法
+         // 缺点：只能继承父类的私有属性，不能继承父类的公有方法
+         /* function Fn() {
+             this.x = 100;
+         }
+         Fn.prototype.showX = function () {
+             alert(this.x);
+         }
+         function Child() {
+             //this -> c Child的实例
+             // call方法，执行Fn，并把Fn里面的this换成c，也就继承了Fn的全部私有属性
+             Fn.call(this);
+         }
+         var c = new Child(); */
+
+         // 3.冒充对象继承，可以把父类的私有和共有都拿过来，克隆一份一模一样的当做子类的私有
+
+         /* function A() {
+             this.x = 2000;
+         }
+
+         A.prototype.showX = function () {
+             alert(this.x);
+         }
+
+         function B() {
+             var temmp = new A;
+             for(var key in temmp){
+                 this[key] = temmp[key]
+             }
+             temmp = null;
+         }
+
+         var n = new B;
+         var a = new A;
+         n.showX = 300; */
+         // 4.混合继承（原型继承+call继承）
+         //缺点：父类的构造函数会执行两次，子类还是可以通过原型链修改父类的属性和方法
+         /* function A() {
+            this.x = 2000;
+         }
+
+         A.prototype.showX = function () {
+            alert(this.x);
+         }
+
+         function B() {
+            A.call(this);
+         }
+         B.prototype = new A;
+         B.prototype.constructor = B;
+         var n = new B; */
+         // 5.寄生组合继承（原型拷贝+call继承）: 子类通过call方法继承父类的私有属性，通过原型拷贝继承父类的共有方法
+         function A() {
+            this.x = 2000;
+         }
+
+        A.prototype.showX = function () {
+            alert(this.x);
+        }
+
+        function B() {
+            A.call(this);
+        }
+
+        function extend(obj1, obj2) {
+            for(var key in obj1){
+                obj2[key] = obj1[key];
+            }
+        }
+
+        extend(A.prototype, B.prototype);
+        var n = new B;
+        var a = new A;
+    </script>
+</body>
+</html>

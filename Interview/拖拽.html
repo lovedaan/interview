@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box1{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #box2{
+            width: 200px;
+            height: 200px;
+            background: blue;
+            position: absolute;
+            left: 0;
+            top: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <script>
+        function extend(obj1, obj2) {
+            for(var k in obj1){
+                obj2[k] = obj1[k];
+            }
+        }
+        function Grag(obj) {
+            this.obj = obj;
+            this.disX = 0;
+            this.disY = 0;
+            this.init();
+        }
+        Grag.prototype.init = function () {
+            var that = this;
+            this.obj.onmousedown = function (ev) {
+                that.fnDown(ev);
+
+                document.onmousemove = function (ev) {
+                    that.fnMove(ev);
+                }
+                document.onmouseup= function (ev) {
+                    document.onmousemove = document.onmouseup = null;
+                }
+                return false;
+            }
+        }
+        Grag.prototype.fnDown = function (ev) {
+            this.disX = ev.clientX - this.obj.offsetLeft;
+            this.disY = ev.clientY - this.obj.offsetTop;
+        }
+
+        Grag.prototype.fnMove = function (ev) {
+            this.obj.style.left = ev.clientX - this.disX + 'px';
+            this.obj.style.top = ev.clientY - this.disY + 'px';
+        }
+        //子类通过call方法继承父类的属性
+        function childGrag(obj) {
+            Grag.call(this,obj);
+        }
+        //子类通过对象拷贝方法继承父类的原型方法
+        extend(Grag.prototype, childGrag.prototype);
+        //子类重新修改原型方法，不会影响父类的方法
+        childGrag.prototype.fnMove = function (ev) {
+            var l = ev.clientX - this.disX;
+            var t = ev.clientY - this.disY;
+            if(l < 0){
+                l = 0;
+            }else if(l >document.documentElement.clientWidth - this.obj.offsetWidth){
+                l = document.documentElement.clientWidth - this.obj.offsetWidth;
+            }
+            if (t < 0) {
+                t = 0;
+            } else if (t > document.documentElement.clientHeight - this.obj.offsetHeight) {
+                t = document.documentElement.clientHeight - this.obj.offsetHeight;
+            }
+            this.obj.style.left = l + 'px';
+            this.obj.style.top = t + 'px';
+        }
+
+        var box1 = document.getElementById('box1');
+        var box2 = document.getElementById('box2');
+        new Grag(box1);
+        new childGrag(box2);
+    </script>
+</body>
+</html>

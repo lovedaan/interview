@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style lang="">
+        div{
+            width: 200px;
+            height: 200px;
+            background: skyblue;
+            position: absolute;
+            left: 30px;
+            top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">23</div>
+    <script>
+        var oDiv = document.querySelector('#box');
+        console.log(getComputedStyle(oDiv)['opacity']);
+        animate(oDiv, {"left": 200, "opacity": 0.5}, 1000);
+
+        function animate(el, targetJson, time) {
+            var semaphore = {};
+            var interval = 5;
+            for(var k in targetJson){
+                semaphore[k] = parseFloat(getComputedStyle(el)[k]);
+            }
+            var maxCount = time / interval;
+            var count = 0;
+            var stepJson = {};
+            for(var k in semaphore) {
+                targetJson[k] = parseFloat(targetJson[k]);
+                stepJson[k] = parseFloat(targetJson[k] - semaphore[k]) / maxCount;
+            }
+
+            //console.log(semaphore);
+
+            var timer = setInterval(function () {
+                for(var k in targetJson){
+                    semaphore[k] += stepJson[k];
+                    if(k != 'opacity'){
+                        el.style[k] = semaphore[k] + 'px';
+                    }else{
+                        el.style[k] = semaphore[k];
+                    }
+                }
+                
+                count++;
+
+                if(count == maxCount){
+                    for (var k in targetJson) {
+                        if (k != 'opacity') {
+                            el.style[k] = targetJson[k] + 'px';
+                        } else {
+                            el.style[k] = targetJson[k];
+                        }
+                    }
+                    clearInterval(timer);
+                }
+
+            }, interval);
+        }
+
+    </script>
+</body>
+</html>

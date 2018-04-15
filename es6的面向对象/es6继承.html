@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* function Animal(name) {
+            this.name = name;
+        }
+        Animal.prototype.eat = function () {
+            console.log(this.name + ' eat')
+        }
+        function Dog(name) {
+            this.name = name;
+        }
+        Dog.prototype = new Animal;
+        Dog.prototype.constructor = Dog;
+        var dog = new Dog('哈士奇');
+        var a = new Animal('雪橇类'); */
+        
+        class Animal {
+            constructor (name) {
+                this.name = name;
+            }
+
+            eat() {
+                console.log(`${this.name} eat`);
+            }
+        }
+
+        class Dog extends Animal {
+            constructor(name) {
+                super(name);
+                this.name = name;
+            }
+            say() {
+                console.log(`${this.name} say`);
+            }
+        }
+        const animal = new Animal('品种');
+        const dog = new Dog('哈士奇');
+        dog.__proto__.eat = function () {
+            alert(123);
+        };
+        dog.say();
+        dog.eat();
+    </script>
+</body>
+</html>

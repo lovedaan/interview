@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../js/jquery.js"></script>
+    <script>
+        function loadData(url) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function (data) {
+                        console.log('执行=====');
+                        resolve(data);
+                    },
+                    error: function (err) {
+                        reject(err);
+                    }
+                });
+            });
+        }
+        /* 
+            统一发送几个ajax请求，可以用Promise.all()
+            接收一个数组参数，数组里面是一个一个请求函数，
+            返回的是请求完全部后的一个数组结果
+        */
+         Promise.all([loadData('./data.json'), loadData('./data2.json')]).then( res => {
+            console.log(res[0]);
+            console.log(res[1]);
+        }); 
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        var oDiv = document.getElementsByTagName('div')[0];
+        /* var nowLeft = 100;
+        var timer = setInterval(() => {
+           nowLeft += 10;
+           if(nowLeft > 700){
+               nowLeft = 700;
+               clearInterval(timer);
+           }
+           oDiv.style.left = nowLeft + 'px';
+        }, 20) */
+
+        var nowLeft = 100;
+        var target = 700;
+        var interval = 20;
+        var time = 2000;
+        var frameNumber = 0;
+        var allFrameNumber = parseInt( time / interval );
+        var step = parseFloat((target - nowLeft ) / allFrameNumber);
+        var timer = setInterval(() => {
+            nowLeft += step;
+            frameNumber++;
+            if (frameNumber === allFrameNumber) {
+                nowLeft = target;
+                clearInterval(timer);
+            }
+            oDiv.style.left = nowLeft + 'px';
+        }, interval)
+        
+    </script>
+</body>
+</html>

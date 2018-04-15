@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../js/jquery.js"></script>
+    <script>
+        var ajax = $.ajax({
+            type: 'GET',
+            url: './data.json'
+        });
+        ajax.then(function (data) {
+            console.log(data);
+            return $.ajax({
+                type: 'GET',
+                url: './data2.json'
+            });
+        }, function (err) {
+            console.log(err);
+        }).then(function (data) {
+            console.log(data);
+        }, function (err) {
+            console.log(err);
+        });
+    </script>
+</body>
+</html>

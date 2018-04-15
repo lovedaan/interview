@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* var str = '我爱你，你却爱着他';
+        str = str.replace(/爱/g,'☆');
+        console.log(str); //我☆你，你却☆着他 */
+        //var str = '我爱你，你却爱着他';
+        /* var str = 'abc defg';
+        str = str.replace(/\B/g, '☆');
+        console.log(str); */ 
+        /*  
+         中文匹配：☆我☆爱☆你☆，☆你☆却☆爱☆着☆他☆
+         中文左右两边都会匹配，就是字符边界
+         英文匹配：a☆b☆c☆d☆e☆f☆g
+         英文相邻的两个字符中间，不相邻的不会匹配，中间有空格逗号或其他符号隔着都不匹配
+        */
+        var str = '12345678901';
+        str = str.replace(/\B(?=(\d{3})+$)/g, ',');
+        console.log(str);
+    </script>
+</body>
+</html>

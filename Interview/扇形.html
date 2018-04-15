@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style lang="">
+        .box{
+            width: 0;
+            height: 0;
+            border-radius: 50px;
+            border-width: 50px;
+            border-style: solid;
+            /* border-color: red blue green yellow; */
+            border-color: #f00 transparent transparent transparent;
+            overflow: hidden;
+        }
+        /* 
+            box-sizing: 常见的有两种属性值，
+                boreder-box: ie怪异盒模型，盒子的宽度是包括内容宽，padding和border
+                contnet-box: 标准盒模型，盒子的宽度只包括内容宽
+
+         */
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        var add = (function () {
+            var i = 0;
+            return function () {
+                i++;
+                console.log(i);
+                if(i === 5) return;
+                add();
+            }
+        })();
+        add();
+        function random(arr) {
+            return arr.sort(function (a, b) {
+                return Math.random() > 0.5 ? -1 : 1;
+            });
+        }
+        console.log(random([1,2,3,4,5]));
+    </script>
+</body>
+</html>

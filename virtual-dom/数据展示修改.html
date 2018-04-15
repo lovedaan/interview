@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        tr th,
+        tr td{
+            width: 100px;
+            text-align: center;
+        }
+        .edit{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>地址</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="contnet">
+
+            </tbody>
+        </table>
+        <div class="edit">
+            <p>姓名：<input type="text" id="username" /></p>
+            <p>年龄：<input type="text" id="userage" /></p>
+            <p>地址：<input type="text" id="address" /></p>
+            <p><button id="btn">提交</button></p>
+        </div>
+    </div>
+    <script src="../js/jquery.js"></script>
+    <script>
+        var app = {
+            init: function() {
+                this.data = [
+                    {
+                        name: '张三',
+                        age: 24,
+                        address: '北京'
+                    },
+                    {
+                        name: '李四',
+                        age: 25,
+                        address: '上海'
+                    },
+                    {
+                        name: '赵六',
+                        age: 26,
+                        address: '深圳'
+                    }
+                ];
+                this.nowIndex = 0;
+                this.$list = $('#contnet');
+                this.$username = $('#username');
+                this.$userage = $('#userage');
+                this.$address = $('#address');
+                this.$editWrap = $('.edit');
+                this.$btn = $('#btn');
+                this.fillData(this.data);
+                this.initEvent();
+            },
+            initEvent: function() {
+                $('.container table').on('click', '.editBtn', function (ev) {
+                    app.nowIndex = ev.target.dataset.index;
+                    app.fillEditVal(app.data[app.nowIndex]);
+                })
+
+                //提交修改
+                this.$btn.on('click', function () {
+                    app.data[app.nowIndex] = {
+                        name: app.$username.val(),
+                        age: app.$userage.val(),
+                        address: app.$address.val()
+                    };
+                    app.fillData(app.data);
+                    app.$username.val('');
+                    app.$userage.val('');
+                    app.$address.val('');
+                    app.$editWrap.hide();
+                });
+            },
+            fillData: function (data) {
+                if (!data.length) return;
+                var str = '';
+                var $list = this.$list;
+                $list.html('');
+                data.forEach(function (item, index) {
+                    str += `
+                    <tr>
+                        <td>${item.name}</td>    
+                        <td>${item.age}</td>    
+                        <td>${item.address}</td>    
+                        <td><button class="editBtn" data-index="${index}">修改</button></td>    
+                    </tr>
+                `;
+                });
+                $list.html(str);
+            },
+            fillEditVal: function (data) {
+                this.$username.val(data.name);
+                this.$userage.val(data.age);
+                this.$address.val(data.address);
+                this.$editWrap.show();
+            }
+        };
+
+        app.init();
+    </script>
+</body>
+</html>

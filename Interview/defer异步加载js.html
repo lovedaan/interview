@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>defer异步加载</title>
+    <script src="./js/defer1.js" defer></script>
+    <script src="./js/defer2.js" defer></script>
+</head>
+<body>
+    <img src="./images/1.jpg" class="img" alt="">
+    <script>
+        console.log('页面中的代码');
+        for (let i = 0; i < 10; i++) {
+            console.log('第'+(i+1)+'个打印');
+        }
+
+       /*  document.addEventListener('DOMContentLoaded', function() {
+            alert(document.querySelector('.img').offsetWidth);
+        }); */
+
+        setTimeout(() => {
+            console.log('页面中的定时器任务');
+        }, 1000);
+    </script>
+</body>
+</html>

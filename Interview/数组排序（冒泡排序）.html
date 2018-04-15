@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            冒泡排序的原理：
+            第一趟：数组中的第一项与后一项比较，大的就交换值，循环交换到最后一个，那么最大的就固定到最后面
+            第二趟：跟上面一样，两两交换，但是次数少一次，最后一个已经固定不用动(每一趟里面的循环次数越来越少)
+            ...
+            第n - 1趟完成全部
+         */
+        function bubble(arr) {
+            for (let i = 0; i < arr.length - 1; i++) {
+                let item = arr[i];
+                for (let j = arr.length - 1; j > i; j--) {
+                    if(arr[j] < arr[j - 1]){
+                        let temp = arr[j];
+                        arr[j] = arr[j - 1];
+                        arr[j-1] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+        console.log(bubble([54,11,22,1,4,2]));
+    </script>
+</body>
+</html>

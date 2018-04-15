@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            这段程序打印的结果是：
+            100,300,200
+        */
+        console.log(100);
+        setTimeout(() => {
+            console.log(200);
+        }, 1000);
+        setTimeout(() => {
+            console.log(300);
+        });
+        setTimeout(() => {
+            console.log(400);
+        }, 0);
+        console.log(500);
+    </script>
+</body>
+</html>

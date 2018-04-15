@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <p>
+            <input type="text" id="txt" v-model="title" @keyup.enter="add" />
+            <button id="submitBtn" @click="add">提交</button>
+        </p>
+        <ul id="list">
+            <li v-for="(item, index) in list" :key="index">{{item}}</li>
+        </ul>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '.container',
+            data: {
+                list: [],
+                title: ''
+            },
+            methods: {
+                add: function () {
+                    if(!this.title) return;
+                    this.list.push(this.title);
+                    this.title = '';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

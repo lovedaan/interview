@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            name: '李四',
+            age: 24,
+            getShow: function () {
+                alert('getShow');
+            }
+        };
+
+        // function init() {
+        //     alert(obj.name);
+        //     alert(obj.age);
+        //     obj.getShow();
+        // }
+        // init();
+
+        function init() {
+            with(obj){
+                alert(age);
+                alert(name);
+                getShow();
+            }
+        }
+        init();
+    </script>
+</body>
+</html>

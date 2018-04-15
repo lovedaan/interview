@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>Object.defineProperty</p>
+        <!-- <h3>{{name}}</h3>
+        <h3>{{age}}</h3> -->
+    </div>
+    <script>
+        /* var obj = {};
+        var name = 'lisi';
+        Object.defineProperty(obj, 'name', {
+            set: function (newVal) {
+                console.log(newVal, 'set');
+                name = newVal;
+            },
+            get: function () {
+                console.log('get');
+                return name;
+            }
+        });
+        console.log(obj.name,'访问值');
+        obj.name = '王五'; */
+
+        var vm = {};
+        var app = document.querySelector('#app');
+        var str =app.innerHTML;
+        var data = {
+            name: 'Lisi',
+            age: 20
+        };
+
+        var key, value;
+        for(key in data){
+            (function (key) {
+                Object.defineProperty(vm, key, {
+                    get: function () {
+                        console.log('get: ' + data[key]);
+                        return data[key];
+                    },
+                    set: function (newVal) {
+                        console.log('set: '+ newVal);
+                        data[key] = newVal;
+                    }
+                });
+            })(key);
+        }
+    </script>
+</body>
+</html>

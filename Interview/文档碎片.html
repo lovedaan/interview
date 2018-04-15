@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        //我们要向页面插入大量的数据的时候，适合用文档碎片
+        /* for (let i = 0; i < 10; i++) {
+            let oP = document.createElement('p');
+            oP.innerHTML = '这是第'+(i+1)+'个段落';
+            document.getElementById('app').appendChild(oP);
+        } */
+
+        var oDiv = document.createDocumentFragment('div');
+
+        for (let i = 0; i < 20; i++) {
+            let oP = document.createElement('p');
+            oP.innerHTML = '这是一次行插入的';
+            oDiv.appendChild(oP);
+        }
+        document.getElementById('app').appendChild(oDiv);
+    </script>
+</body>
+</html>

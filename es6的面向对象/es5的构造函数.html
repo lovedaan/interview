@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            在es5中是没有类的概念的，我们是通过一个构造函数去模拟一个类
+            构造函数：
+            函数名一般用大写字母开头
+            用new关键字调用，返回一个实例指向这个构造函数的作用域
+        */ 
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        } 
+        Person.prototype.showName = function () {
+            alert(this.name);
+        } 
+        var p1 = new Person('ace', 18);
+        p1.showName(); 
+        console.log(typeof Person) //function
+        console.log(p1.__proto__ === Person.prototype);
+        console.log(Person === Person.prototype.constructor)
+    </script>
+</body>
+</html>

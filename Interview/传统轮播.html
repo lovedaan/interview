@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        .carousel{
+            width: 830px;
+            height: 440px;
+            border: 1px solid #000;
+            position: relative;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+        .carousel .m_nuit{
+            width: 5000px;
+            height: 440px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .carousel .m_nuit li{
+            float: left;
+        }
+        .carousel .m_nuit li a{
+            display: block;
+            width: 830px;
+            height: 440px;
+        }
+        .btns a{
+            position: absolute;
+            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: slateblue;
+            color:#fff;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            top:50%;
+            margin-top: -20px;
+            font-size: 30px;
+        }
+        #leftBtn{
+            left: 10px;
+        }
+        #rightBtn{
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel" id="carousel">
+        <ul class="m_nuit">
+            <li>
+                <a href="javascript:;">
+                    <img src="./images/1.jpg" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="./images/2.jpg" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="./images/3.jpg" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="./images/4.jpg" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="./images/5.jpg" alt="" />
+                </a>
+            </li>
+        </ul>
+        <div class="btns">
+            <a href="javascript:;" id="leftBtn">&lt;</a>
+            <a href="javascript:;" id="rightBtn">&gt;</a>
+        </div>
+    </div>
+    <script src="./animate.js"></script>
+    <script>
+        var carousel = document.getElementById('carousel');
+        var m_nuit = carousel.getElementsByTagName('ul')[0];
+        var lis = carousel.getElementsByTagName('li');
+        var leftBtn = document.getElementById('leftBtn');
+        var rightBtn = document.getElementById('rightBtn');
+
+        //复制第一节点放到ul后面
+        m_nuit.appendChild(lis[0].cloneNode(true));
+        var nowIndex = 0;
+        var w = 830;
+        //右按钮点击
+        rightBtn.onclick = function () {
+            nowIndex++;
+            animate({
+                el: m_nuit,
+                time: 600,
+                data:{
+                    left: -nowIndex * w
+                },
+                type: 'easeInOut',
+                callback: function () {
+                    if(nowIndex === lis.length - 1){
+                        nowIndex = 0;
+                        m_nuit.style.left = '0px';
+                    }
+
+                }
+            });
+        }
+    </script>
+</body>
+</html>

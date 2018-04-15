@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        function Fn() {
+            this.x = 100;
+            this.y = 200;
+        }
+        Fn.prototype.showName = function () {
+            alert(this.x);
+        }
+        var f = new Fn;
+        //in 是判断的意思，可以判断共有和私有
+        //console.log('x' in f);
+        //console.log(f.hasOwnProperty('x'));
+        //封装判断共有属性
+        //那么首先要判断它还是不是对象的属性，然后在判断私有属性取反
+        function hasPuProperty(attr, obj) {
+            return attr in obj && !obj.hasOwnProperty(attr);
+        }
+        console.log(hasPuProperty('showName',f));
+    </script>
+</body>
+</html>

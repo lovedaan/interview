@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        for (var i = 0; i < 4; i++) {
+            setTimeout(() => {
+                console.log(i); 
+            }, 10);
+        }
+        /* 
+            输出的结果是四个4
+            js引擎解析运行js代码的时候，遇到定时器任务，先放在一边，然后继续执行同步代码，当同步代码执行完，再把定时器任务按照时间顺序放在异步任务队列中，按时间短的优先执行，for循环是同步代码，而且i是全局的变量，每次循环都有一个定时器任务，总共有四次循环就有四次定时器任务，全部循环完，i此时已经是4，同步任务执行完就执行定时器任务，所以打印是就是4个4；
+            这里即使定时器的时间写的是0毫秒，也不会立即执行，浏览器有个最小的时间，当设置小于这个最小时间，浏览器也会当做这个最小时间来算
+         */
+         //如果需要输出的是 0,1,2,3
+         //有两种方法，在es5中要借助闭包的特效，在es6中，用let来声明变量即可
+         
+         for(var i = 0; i < 4; i++){
+             (function (i) {
+                 setTimeout(() => {
+                     console.log('es5的方式', i);
+                 }, 10);
+             })(i);
+         }
+         //==================================
+         for (let i = 0; i < 4; i++) {
+            setTimeout(() => {
+                console.log('es6的方式', i);
+            }, 10);
+             
+         }
+    </script>
+</body>
+</html>

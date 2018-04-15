@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+          在es5的时候，this是谁，在定义的时候是无法确定的，
+          只有在函数调用的时候才能确定
+          
+          es6的箭头函数
+         */
+        // var name = '张三';
+        // var obj = {
+        //     name: '李四',
+        //     // showName : function () {
+        //     //     //谁调用这个方法，this就是谁
+        //     //     console.log(this.name);
+        //     // }
+        //     showName:  () => {
+        //         //谁调用这个方法，this就是谁
+        //         console.log(this.name);
+        //         setTimeout(() => {
+        //             console.log(this.name);
+        //         }, 10);
+        //     }
+        // }
+        // obj.showName();
+        // 'use strict'
+        // function a() {
+        //     alert(1);
+        // }
+
+        // function init() {
+        //     a();
+        //     if(false){
+        //         function a() {
+        //             alert(2);
+        //         }
+        //     }
+        // }
+        // init();
+        // rest 参数
+        // var obj = {
+        //     name: '李四',
+        //     age: 25
+        // };
+        // var obj2 = {...obj};
+        // console.log(obj2)
+
+        // function sum() {
+        //     var sumNumber = 0;
+        //     var argArr = Array.prototype.slice.call(arguments);
+        //     argArr.push(4);
+        //     for (let i = 0; i < argArr.length; i++) {
+        //         sumNumber += argArr[i];
+        //     }
+        //     console.log(sumNumber)
+        //     return sumNumber;
+        // }
+        //  console.log( sum(1,2,3) );
+
+        function sum(...args) {
+            console.log(args instanceof Array)
+            //console.log(arguments instanceof Array)
+        }
+        sum(1,2,3);
+    </script>
+</body>
+</html>

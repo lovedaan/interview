@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background: skyblue;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .box2{
+            background: yellowgreen;
+            top:250px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <script>
+        function extend(obj1, obj2) {
+            for(var k in obj1){
+                obj2[k] = obj1[k];
+            }
+        }
+        function DragPerson(el) {
+            this.el = el;
+            this.disX = 0;
+            this.disY = 0;
+            this.init();
+        }
+        DragPerson.prototype.init = function () {
+            this.el.onmousedown = (e) => {
+                this.fnDowm(e);
+
+                document.onmousemove = (e) => {
+                    this.fnMove(e);
+                }
+
+                document.onmouseup = function () {
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                }
+                return false;
+            }
+        }
+        DragPerson.prototype.fnDowm = function (e) {
+            this.disX = e.clientX - this.el.offsetLeft;
+            this.disY = e.clientY - this.el.offsetTop;
+        }
+        DragPerson.prototype.fnMove = function (e) {
+            this.el.style.left = e.clientX - this.disX + 'px';
+            this.el.style.top = e.clientY - this.disY + 'px';
+        }
+
+        function GragChild(el) {
+            DragPerson.call(this, el);
+        }
+        extend(DragPerson.prototype, GragChild.prototype);
+        GragChild.prototype.fnMove = function (e) {
+            var l = e.clientX - this.disX;
+            var t = e.clientY - this.disY;
+
+            if(l < 0){
+                l = 0;
+            }else if(l>document.documentElement.clientWidth - this.el.clientWidth){
+                l = document.documentElement.clientWidth - this.el.clientWidth;
+            }
+
+            if (t < 0) {
+                t = 0;
+            } else if (t > document.documentElement.clientHeight - this.el.clientHeight) {
+                t = document.documentElement.clientHeight - this.el.clientHeight;
+            }
+
+            this.el.style.left = l + 'px';
+            this.el.style.top = t + 'px';
+        }
+        var oDiv1 = document.getElementsByClassName('box1')[0];
+        var oDiv2 = document.getElementsByClassName('box2')[0];
+        new DragPerson(oDiv1);
+        new GragChild(oDiv2);
+    </script>
+</body>
+</html>

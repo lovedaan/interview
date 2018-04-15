@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //js检查数据类型有四种方法
+
+        /*
+           1. typeof：typeof 1 ==> 'number'的字符串，typeof返回的都是字符串类型，只是值有区别
+            用途：检查基本数据类型，number,string,boolean,undefined（除了null）
+            局限性：
+                ①.不能检测 null，返回的是‘object’，null是空指针，空对象，但不是一个对象
+                ②.不能具体区分数组和对象，都返回‘object’
+
+        */ 
+        //console.log(typeof 1); //'number'
+        //console.log(typeof [123]); //'object'
+        //console.log(typeof undefined); //'undefined'
+        //console.log(typeof null); //'object'
+        /* 
+           2. instanceof: 检查某个实例是否属于某个类
+            局限性：
+              ①.对于基本数据类型，字面量方式创建出来的结果和通过实例创建的方式（new Number(1)）结果是有区别的，从严格意义上来讲，只有实例创建的结果才是标准的对象数据类型(new Number()),通过字面量创建的是基本数据类型，不是严谨的实例，由于js的松散型，导致了字面量也可以调用Number.prototype上的方法和属性
+              ②.只要在当前实例的原型链上，我们用其检测出来的都是true
+              ③.通过原型继承，检测出来的结果未必准确
+         */
+         //console.log([1, 2] instanceof Array); // true
+         //console.log({name:12} instanceof Array); // false
+        //console.log(1 instanceof Number);  //false
+        //console.log(new Number(1) instanceof Number);  //true
+
+        /* console.log([1, 2] instanceof Array); // true
+        console.log([1, 2] instanceof Object); // true
+        console.log(function fn() {} instanceof Function); // true
+        console.log(function fn() {} instanceof Object); // true */
+        /* function Fn () {
+            
+        }
+        //原型链继承，让之类的原型等于父类的一个实例
+        Fn.prototype = new Array;
+        var f = new Fn;
+        //通过继承，然后原型链查找，可以使用数组的方法，但它不是一个数组
+        f.push(2); */
+        //console.log(f); [2]
+        //console.log(f instanceof Array); //true
+        //console.log(Object.prototype.toString.call(f)); //[object Object]
+        /* 
+            3. constructor 构造函数，和instanceof非常相似
+            可以检测字面量创建的基本数据类型，
+            一般情况下可以区分数组和对象
+            局限性：如果重写覆盖了类的原型，没有constructor属性，那就会沿着原型链往上找，检测结果就不一定准确
+         */
+        /* var ary = [12];
+        var num = 12;
+        console.log(ary.constructor === Array); //true
+        console.log(ary.constructor === Object); //false
+        console.log(num.constructor === Number); //true
+        function Fn() {}
+        Fn.prototype = {
+            name: '李四'
+        };
+        var fn = new Fn;
+        console.log(fn.constructor === Object); //true */
+        /* 
+            4. Object.prototype.toString.call() 最准确最常用的
+            首先获取Object原型上的toSting方法，执行，并改变this的指向
+            Object.prototype.toString作用：返回当前方法的执行主体(方法中this)所属的详细信息
+         */
+
+         var ary = [];
+         var obj = {};
+         console.log(Object.prototype.toString.call(ary)); //[object Array]
+         console.log(Object.prototype.toString.call(obj)); //[object Object]
+         console.log(Object.prototype.toString.call(1)); //[object Number]
+         console.log(Object.prototype.toString.call(/^$/)); //[object RegExp]
+         console.log(Object.prototype.toString.call('123')); //[object String]
+         console.log(Object.prototype.toString.call(true)); //[object Boolean]
+         console.log(Object.prototype.toString.call(null)); //[object Null]
+         console.log(Object.prototype.toString.call(undefined)); //[object Undefined]
+         console.log(Object.prototype.toString.call(new Date())); //[object Date]
+         console.log(Object.prototype.toString.call(function fn() { })); //[object Function]
+        
+
+    </script>
+</body>
+</html>

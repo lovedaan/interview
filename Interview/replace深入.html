@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var str = '我今天买了手机用了3000元，买电脑用了5000元，买电磁炉用了400元，今天天气20度。';
+        /* str = str.replace(/\d+/g,function (a, b, c) {
+            console.log(a); // 匹配的字符
+            console.log(b); // 起始位置
+            console.log(c); // 元字符串
+        }); */
+        str = str.replace(/(\d+)元/g, function ($0, $1, index) {
+            /* console.log($0); // 匹配的字符
+            console.log($1); // 圆括号内匹配的字符
+            console.log(index); // 起始位置 */
+            return parseInt($1 / 6) + '美元';
+        });
+        //console.log(str);
+        //var str2 = '我的名字叫??[0],我今年??[1]岁了,我是一个阳光??[2]。';
+        /* var data = {
+            name: '李四',
+            age: 25
+        }; */
+        /* var data = ['李四', '25', '男生'];
+       str2 =  str2.replace(/\?\?\[(\d+)\]/g,function ($0, $1) {
+            console.log($0);
+            console.log($1);
+            return data[$1] || '';
+        });
+        console.log(str2); */
+
+        /* var str3 = 'border-left-width';
+        //转换成驼峰 borderLeftWidth
+        str3 = str3.replace(/\-(\w)/g, function($0, $1) {
+            //console.log($0);
+            //console.log($1);
+            return $1.toUpperCase();
+        });
+        console.log(str3); */
+    </script>
+</body>
+</html>

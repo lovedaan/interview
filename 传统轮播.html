@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        #carousel{
+            width: 960px;
+            height: 400px;
+            margin: 50px auto;
+            border: 1px solid #000;
+            position: relative;
+            overflow: hidden;
+        }
+        #carousel .m_nuit{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 6000px;
+            height: 400px;
+        }
+        #carousel .m_nuit li{
+            float: left;
+        }
+        #carousel .m_nuit li a{
+           display: block;
+           width: 960px;
+           height: 400px; 
+        }
+        .btns a{
+            position: absolute;
+            top: 50%;
+            margin-top: -31px;
+            width: 46px;
+            height: 62px;
+            background: url('./images/but.png') no-repeat left center;
+        }
+        #leftBtn{
+            left:10px;
+        }
+        #rightBtn{
+            right:10px;
+            background-position: right top;
+        }
+        #carousel .circle{
+            position: absolute;
+            width: 180px;
+            height: 25px;
+            left:50%;
+            transform: translateX(-50%);
+            bottom: 15px;
+        }
+        #carousel .circle span{
+            float: left;
+            width: 25px;
+            height: 25px;
+            background: skyblue;
+            border-radius: 50%;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        #carousel .circle span.active{
+            background: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="carousel">
+        <ul class="m_nuit">
+            <li>
+                <a href="javascript:;">
+                    <img src="./images/1.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="./images/2.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="./images/3.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="./images/4.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="./images/5.jpg" alt="">
+                </a>
+            </li>
+        </ul>
+        <div class="btns">
+            <a href="javascript:;" id="leftBtn"></a>
+            <a href="javascript:;" id="rightBtn"></a>
+        </div>
+        <div class="circle">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <script src="./animate.js"></script>
+    <script>
+        var carousel = document.getElementById('carousel');
+        var m_nuit = carousel.getElementsByTagName('ul')[0];
+        var lis = carousel.getElementsByTagName('li');
+        var circles = carousel.getElementsByTagName('span');
+        var leftBtn = document.getElementById('leftBtn');
+        var rightBtn = document.getElementById('rightBtn');
+        var imgLength = lis.length;
+        m_nuit.appendChild(lis[0].cloneNode(true));
+
+        var nowIndex = 0;
+        var w = 960;
+
+        rightBtn.onclick = function () {
+            if(m_nuit.animated) return;
+            nowIndex++;
+            animate({
+                el: m_nuit,
+                time: 1000,
+                data: {
+                    left: -w * nowIndex
+                },
+                callback: function () {
+                    if(nowIndex === imgLength){
+                        nowIndex = 0;
+                        m_nuit.style.left = '0px';
+                    }
+                    changeCircle(nowIndex);
+                }
+            });
+            
+        }
+
+        leftBtn.onclick = function () {
+            if (m_nuit.animated) return;
+            nowIndex--;
+            if(nowIndex < 0){
+                m_nuit.style.left =  - w * imgLength + 'px';
+                nowIndex = imgLength - 1;
+            }
+            changeCircle(nowIndex);
+            animate({
+                el: m_nuit,
+                time: 1000,
+                data: {
+                    left: -w * nowIndex
+                }
+            });
+        }
+
+        for(var i =0; i< circles.length; i++){
+            circles[i].index = i;
+            circles[i].onclick = function() {
+                if (m_nuit.animated) return;
+                for (var i = 0; i < circles.length; i++) {
+                    circles[i].className = '';
+                }
+                this.className = 'active';
+                nowIndex = this.index;
+                animate({
+                    el: m_nuit,
+                    time: 1000,
+                    data: {
+                        left: -w * nowIndex
+                    },
+                    callback: function () {
+                        if (nowIndex === imgLength) {
+                            nowIndex = 0;
+                            m_nuit.style.left = '0px';
+                        }
+                    }
+                });
+            }
+        }
+
+        function changeCircle(index) {
+            for (var i = 0; i < circles.length; i++){
+                circles[i].className = '';
+            }
+            circles[index].className = 'active'; 
+        }
+
+    </script>
+</body>
+</html>

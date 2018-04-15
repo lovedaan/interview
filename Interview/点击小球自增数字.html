@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .circle{
+            width: 100px;
+            height: 100px;
+            background: -webkit-linear-gradient(top, red, blueviolet);
+            border-radius: 50%;
+            font-size: 40px;
+            text-align: center;
+            line-height: 100px;
+            margin: 50px auto;
+            cursor: pointer;
+            color:#fff;
+            -webkit-user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="circle">0</div>
+    <script>
+        var circle = document.querySelector('.circle');
+        /* var num = 0;
+        circle.onclick = function () {
+            num++;
+            this.innerHTML = num;
+        } */
+        // 匿名函数，利用闭包的特效，私有作用域不销毁
+        /* (function () {
+            var num = 0;
+            circle.onclick = function () {
+                this.innerHTML = ++num;
+            }
+        })(); */
+        /* 
+            匿名函数一加载就执行，返回一个地址
+         */
+        /* circle.onclick = (function () {
+            var num = 0;
+            return function () {
+                this.innerHTML = ++num;
+            }
+        })(); */
+        //利用自定义属性
+        circle.n = 0;
+        circle.onclick = function () {
+            this.innerHTML = ++this.n;
+        }
+    </script>
+</body>
+</html>
