@@ -12,24 +12,27 @@
           在es5的时候，this是谁，在定义的时候是无法确定的，
           只有在函数调用的时候才能确定
           
-          es6的箭头函数
+          es6的箭头函数,this是在定义的环境决定，跟再哪调用没关
          */
-        // var name = '张三';
-        // var obj = {
-        //     name: '李四',
-        //     // showName : function () {
-        //     //     //谁调用这个方法，this就是谁
-        //     //     console.log(this.name);
-        //     // }
-        //     showName:  () => {
-        //         //谁调用这个方法，this就是谁
-        //         console.log(this.name);
-        //         setTimeout(() => {
-        //             console.log(this.name);
-        //         }, 10);
-        //     }
-        // }
-        // obj.showName();
+        var name = '张三';
+        function init() {
+            var obj = {
+                name: '李四',
+                // showName : function () {
+                //     //谁调用这个方法，this就是谁
+                //     console.log(this.name);
+                // }
+                showName: () => {
+                    //谁调用这个方法，this就是谁
+                    console.log(this.name);
+                    setTimeout(() => {
+                        console.log(this.name);
+                    }, 10);
+                }
+            }
+            obj.showName();
+        }
+        init();
         // 'use strict'
         // function a() {
         //     alert(1);
@@ -64,11 +67,17 @@
         // }
         //  console.log( sum(1,2,3) );
 
-        function sum(...args) {
-            console.log(args instanceof Array)
-            //console.log(arguments instanceof Array)
-        }
-        sum(1,2,3);
+        // function sum(...args) {
+        //     console.log(args instanceof Array)
+        //     //console.log(arguments instanceof Array)
+        // }
+        // sum(1,2,3);
+        // console.log(fn2)
+        // var fn = () => {
+        //     console.log(123)
+        // }
+
+        //https://segmentfault.com/a/1190000011091907
     </script>
 </body>
 </html>
